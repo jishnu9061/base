@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Created By: JISHNU T K
+ * Date: 2025/08/19
+ * Time: 20:18:35
+ * Description: ApiResponseTrait.php
+ */
+
 namespace App\Traits;
 
 use Illuminate\Http\JsonResponse;
