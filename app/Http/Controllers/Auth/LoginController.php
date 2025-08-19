@@ -45,15 +45,15 @@ class LoginController extends Controller
      */
     public function login(UserLoginRequest $request)
     {
-        $result = $this->authService->loginWeb($request->email, $request->password);
+        $login = $this->authService->loginWeb($request->email, $request->password);
 
-        if (isset($result['error'])) {
-            return back()->withErrors(['error' => $result['error']]);
+        if (isset($login['error'])) {
+            return back()->withErrors(['error' => $login['error']]);
         }
 
         ToastrHelper::success('Login successful!');
 
-        $user = $result['user'];
+        $user = $login['user'];
 
         return $user->role === UserTypes::ADMIN
             ? redirect()->route('admin.dashboard')
