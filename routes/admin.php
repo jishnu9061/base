@@ -14,10 +14,10 @@ use App\Http\Controllers\Admin\Auth\LoginController;
 |
 */
 
-Route::get('login', [LoginController::class, 'showLoginForm'])->name('login.form');
+Route::get('login', [LoginController::class, 'showLoginForm'])->name('admin.login.form');
 Route::post('login', [LoginController::class, 'login'])->name('admin.login');
 
-Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+Route::post('logout', [LoginController::class, 'logout'])->name('admin.logout');
 
 Route::middleware('auth')->group(function () {
     Route::get('/admin/dashboard', fn() => view('admin.dashboard'))->name('admin.dashboard');
