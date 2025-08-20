@@ -11,9 +11,8 @@ namespace App\Services;
 
 use App\Exceptions\ModelException;
 
-use App\Repositories\AuthRepository;
-
 use App\Repositories\UserRepository;
+
 use Illuminate\Support\Facades\Auth;
 
 class AuthService
@@ -25,10 +24,35 @@ class AuthService
         $this->userRepository = $userRepository;
     }
 
-    public function loginWeb(string $email, string $password)
+    /**
+     * @param string $email
+     * @param string $password
+     *
+     * @return [type]
+     */
+    public function loginAdminWeb(string $email, string $password)
     {
         try {
-            $user = $this->userRepository->attemptLogin($email, $password);
+            $user = $this->userRepository->attemptAdminLogin($email, $password);
+
+            Auth::login($user);
+
+            return ['user' => $user];
+        } catch (ModelException $e) {
+            return ['error' => $e->getMessage()];
+        }
+    }
+
+    /**
+     * @param string $email
+     * @param string $password
+     *
+     * @return [type]
+     */
+    public function loginUserWeb(string $email, string $password)
+    {
+        try {
+            $user = $this->userRepository->attemptUserLogin($email, $password);
 
             Auth::login($user);
 

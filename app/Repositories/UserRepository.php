@@ -9,6 +9,7 @@
 
 namespace App\Repositories;
 
+use App\Models\Admin;
 use App\Models\User;
 
 use App\Exceptions\ModelException;
@@ -17,7 +18,22 @@ use Illuminate\Support\Facades\Hash;
 
 class UserRepository
 {
-    public function attemptLogin(string $email, string $password)
+    public function attemptAdminLogin(string $email, string $password)
+    {
+        $user = Admin::where('email', $email)->first();
+
+        if (!$user) {
+            throw new ModelException("User not found", 404);
+        }
+
+        if (!Hash::check($password, $user->password)) {
+            throw new ModelException("Invalid credentials", 401);
+        }
+
+        return $user;
+    }
+
+    public function attemptUserLogin(string $email, string $password)
     {
         $user = User::where('email', $email)->first();
 
