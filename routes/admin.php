@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\XeroAuthController;
 use App\Http\Controllers\Admin\Auth\LoginController;
 
 /*

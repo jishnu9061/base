@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\XeroAuthController;
 use App\Http\Controllers\Auth\LoginController;
 
 /*
@@ -15,3 +16,7 @@ use App\Http\Controllers\Auth\LoginController;
 */
 
 // Route::get('/', [LoginController::class, 'showLoginForm'])->name('login.form');
+
+
+Route::get('/xero/connect', [XeroAuthController::class, 'connect'])->name('xero.connect');
+Route::get('/xero/callback', [XeroAuthController::class, 'callback'])->name('xero.callback');
